@@ -22,3 +22,7 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Skill output files (interview prep documents, etc.)
+*_면접준비.md
+*_interview_prep.md
