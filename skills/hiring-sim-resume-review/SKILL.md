@@ -1,5 +1,5 @@
 ---
-name: hiring-resume-review
+name: hiring-sim-resume-review
 description: ATS 시뮬레이션과 리크루터 스크리닝을 거쳐 이력서를 실전 기준으로 평가합니다.
 user-invocable: true
 ---

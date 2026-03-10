@@ -1,5 +1,5 @@
 ---
-name: hiring-interview
+name: hiring-sim-interview
 description: 이력서 기반 기술 면접, 인성 면접을 FAANG 스타일 루브릭으로 시뮬레이션합니다.
 user-invocable: true
 ---

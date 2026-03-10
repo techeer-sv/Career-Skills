@@ -1,5 +1,5 @@
 ---
-name: hiring-interview-prep
+name: hiring-prep-interview
 description: 채용공고를 분석하고 병렬 리서치 에이전트를 통해 면접 후기·기술 질문·회사 정보를 동시에 수집하여 맞춤형 면접 대비 예상 질문 문서를 생성합니다.
 user-invocable: true
 ---

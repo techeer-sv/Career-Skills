@@ -1,5 +1,5 @@
 ---
-name: hiring-doc-feedback
+name: hiring-prep-doc-feedback
 description: 이력서, 자기소개서, 포트폴리오에 대해 리서치 기반의 구조화된 피드백을 제공합니다.
 user-invocable: true
 ---

@@ -1,5 +1,5 @@
 ---
-name: hiring-portfolio-review
+name: hiring-sim-portfolio-review
 description: 포트폴리오의 프로젝트 품질, 기술적 의사결정, 실무 역량을 실전 기준으로 평가합니다.
 user-invocable: true
 ---

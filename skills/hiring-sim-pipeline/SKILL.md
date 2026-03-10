@@ -1,5 +1,5 @@
 ---
-name: hiring-full-pipeline
+name: hiring-sim-pipeline
 description: 채용 공고를 분석하여 해당 회사에 맞는 채용 프로세스를 시뮬레이션합니다. 회사별 맞춤 또는 일반 프로세스 지원.
 user-invocable: true
 ---
@@ -42,13 +42,13 @@ user-invocable: true
 **채용 공고 (필수):**
 - "채용 공고 내용을 붙여넣어주세요. URL도 가능합니다."
 - URL 제공 시 WebFetch 시도. 실패하면 직접 붙여넣기 요청.
-- 미제공 시: "통합 파이프라인에서는 채용 공고가 필수입니다. 개별 스킬을 사용하세요: `/hiring-resume-review`, `/hiring-interview`"
+- 미제공 시: "통합 파이프라인에서는 채용 공고가 필수입니다. 개별 스킬을 사용하세요: `/hiring-sim-resume-review`, `/hiring-sim-interview`"
 
 **코딩 테스트 포함 여부 (선택):**
 - "코딩 테스트를 포함할까요? (포함 / 제외)"
 - 포함 시: 프로세스에 코딩 테스트 단계 유지
 - 제외 시: 프로세스에서 코딩 테스트 단계를 건너뜀 (서류 → 면접으로 바로 진행)
-- 기본값: **제외** (빠른 파이프라인 경험 우선. 코딩 테스트는 `/hiring-coding-test`로 개별 실행 가능)
+- 기본값: **제외** (빠른 파이프라인 경험 우선. 코딩 테스트는 `/hiring-sim-coding-test`로 개별 실행 가능)
 
 > 코딩 테스트는 실제 풀이 + 평가까지 포함되어 시간이 상당히 소요됩니다.
 > 빠르게 전체 프로세스를 경험하려면 제외를 권장합니다.
@@ -218,7 +218,7 @@ for each stage in stages:
     → continue
 
   if stage가 코딩 테스트 단계 AND 사용자가 "코딩 테스트 제외" 선택:
-    → "코딩 테스트 단계를 건너뜁니다. (개별 연습: `/hiring-coding-test`)"
+    → "코딩 테스트 단계를 건너뜁니다. (개별 연습: `/hiring-sim-coding-test`)"
     → continue
 
   → 해당 스킬의 SKILL.md를 Read (프로젝트 내 또는 ~/.claude/skills/ 경로)
@@ -247,7 +247,7 @@ for each stage in stages:
 
 **포트폴리오 처리:**
 - 서류 심사 단계에서 포트폴리오가 제공된 경우:
-  - `hiring-portfolio-review/SKILL.md`도 Read하여 함께 수행
+  - `hiring-sim-portfolio-review/SKILL.md`도 Read하여 함께 수행
   - 이력서 PASS + 포트폴리오 PASS → 서류 심사 PASS
   - 이력서 REJECT → 서류 심사 REJECT (포트폴리오 무관)
   - 이력서 PASS + 포트폴리오 REJECT → 서류 심사 PASS (포트폴리오는 보조 자료)
@@ -324,7 +324,7 @@ for each stage in stages:
 - [개선점에 맞는 학습 방향]
 
 ### 재도전 방법
-"개선 후 `/hiring-full-pipeline`으로 다시 시작하세요.
+"개선 후 `/hiring-sim-pipeline`으로 다시 시작하세요.
 이전 단계 PASS 결과는 `.hiring-pipeline/`에 저장되어 있습니다."
 ```
 

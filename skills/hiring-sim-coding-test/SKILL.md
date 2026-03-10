@@ -1,5 +1,5 @@
 ---
-name: hiring-coding-test
+name: hiring-sim-coding-test
 description: FAANG 스타일 4차원 루브릭으로 코딩 테스트를 시뮬레이션합니다.
 user-invocable: true
 ---
