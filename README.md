@@ -3,9 +3,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/techeer-sv/Skill-Archive?style=flat-square)](https://github.com/techeer-sv/Skill-Archive/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
-Claude Code에서 바로 쓰는 채용 준비 스킬 모음.
+Claude Code용 실전 스킬 아카이브.
 
-*이력서 피드백부터 면접 시뮬레이션까지 — 슬래시 커맨드 하나로.*
+*채용 준비, 코드 리뷰, 학습 도구 — 슬래시 커맨드 하나로.*
 
 ---
 
@@ -16,19 +16,41 @@ Claude Code에서 바로 쓰는 채용 준비 스킬 모음.
 ## 시작하기
 
 ```bash
-# 전체 스킬 설치
-cp -r skills/hiring-sim-*/  ~/.claude/skills/
-cp -r skills/hiring-prep-*/ ~/.claude/skills/
-cp -r skills/hiring-common/ ~/.claude/skills/
+# 전체 설치 (스킬 + hook)
+./scripts/install.sh
 
-# 특정 스킬만 설치 (예: 이력서 리뷰)
-cp -r skills/hiring-sim-resume-review/ ~/.claude/skills/
-cp -r skills/hiring-common/            ~/.claude/skills/
+# 전체 스킬만 설치 (hook 제외)
+./scripts/install.sh --skills-only
+
+# 특정 스킬만 설치
+./scripts/install.sh hiring-sim-resume-review
+
+# hook만 설치
+./scripts/install.sh --hook-only
 ```
 
 설치 후 Claude Code에서 `/hiring-sim-resume-review` 형태로 바로 호출 가능.
 
 **요구사항**: [Claude Code CLI](https://claude.ai/code)
+
+### Hook 설정
+
+설치 스크립트가 hook 파일을 `~/.claude/hooks/`에 복사한 뒤, `~/.claude/settings.json`에 아래 설정을 추가하세요:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "command": "node ~/.claude/hooks/skill-injector.mjs"
+      }
+    ]
+  }
+}
+```
+
+설정 후 프롬프트에서 트리거 키워드 입력 시 매칭되는 스킬이 자동 주입됩니다.
 
 ---
 
@@ -45,7 +67,9 @@ cp -r skills/hiring-common/            ~/.claude/skills/
 
 ## 스킬 목록
 
-### 시뮬레이션 (hiring-sim-*)
+### 🎯 Hiring — 채용 준비
+
+#### 시뮬레이션 (hiring-sim-*)
 
 채용 프로세스를 면접관 / 채용담당자 관점에서 시뮬레이션.
 
@@ -59,7 +83,7 @@ cp -r skills/hiring-common/            ~/.claude/skills/
 
 > 🚧 미완성 — 기본 기능은 동작하나 고도화 진행 중.
 
-### 준비 도구 (hiring-prep-*)
+#### 준비 도구 (hiring-prep-*)
 
 채용 준비를 지원자 관점에서 도움.
 
@@ -68,7 +92,7 @@ cp -r skills/hiring-common/            ~/.claude/skills/
 | 서류 피드백 | `/hiring-prep-doc-feedback` | 이력서 / 자소서 / 포트폴리오 리서치 기반 피드백 | ✅ |
 | 면접 준비 | `/hiring-prep-interview` | 병렬 리서치 기반 맞춤형 면접 예상 질문 문서 생성 | ✅ |
 
-### 기타
+#### 기타
 
 | 스킬 | 명령어 | 설명 | 상태 |
 |------|--------|------|------|
@@ -77,6 +101,8 @@ cp -r skills/hiring-common/            ~/.claude/skills/
 ---
 
 ## 워크플로우
+
+### 채용 준비 워크플로우
 
 ```
 채용 준비 전체 흐름
@@ -143,9 +169,10 @@ cp -r skills/hiring-common/            ~/.claude/skills/
 - [ ] 면접 시뮬레이션 고도화 (음성 모드, 후속 질문 심화)
 - [ ] Cursor 지원
 - [ ] Antigravity 지원
+- [ ] 더 많은 카테고리 추가 (코드 리뷰, 학습 도구 등)
 
 ---
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE)
