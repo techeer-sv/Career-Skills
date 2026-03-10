@@ -1,0 +1,28 @@
+# omc (oh-my-claudecode) internal state
+.omc/
+
+# Claude Code project config (local only)
+.claude/
+
+# Pipeline runtime data (generated per user session)
+.hiring-pipeline/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Skill output files (interview prep documents, etc.)
+*_면접준비.md
+*_interview_prep.md
