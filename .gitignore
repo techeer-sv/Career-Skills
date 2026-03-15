@@ -26,3 +26,36 @@ Thumbs.db
 # Skill output files (interview prep documents, etc.)
 *_면접준비.md
 *_interview_prep.md
+
+# Coding test files (coding test, etc.)
+*코딩테스트*.md
+*코딩테스트*.txt
+*코딩테스트*.docx
+*코딩테스트*.doc
+*코딩테스트*.docx
+
+# 면접 관련 문서 files (면접 후기, 면접 질문, 면접 준비 문서, etc.)
+*면접*.md
+*면접*.txt
+*면접*.docx
+*면접*.doc
+*면접*.docx
+
+cover-letter-drafts/*
+
+# Document files (portfolio, etc.)
+*포트폴리오*.pdf
+*포트폴리오*.md
+*포트폴리오*.txt
+*포트폴리오*.docx
+*포트폴리오*.doc
+*포트폴리오*.docx
+*이력서*.pdf
+*이력서*.md
+*이력서*.txt
+*이력서*.docx
+*이력서*.doc
+*이력서*.docx
+
+안랩/*
+
