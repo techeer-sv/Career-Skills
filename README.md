@@ -1,6 +1,6 @@
 # Career-Skills
 
-[![GitHub stars](https://img.shields.io/github/stars/techeer-sv/Skill-Archive?style=flat-square)](https://github.com/techeer-sv/Skill-Archive/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/techeer-sv/Career-Skills?style=flat-square)](https://github.com/techeer-sv/Career-Skills/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
 Claude Code용 실전 스킬 아카이브.
