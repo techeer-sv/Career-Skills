@@ -1,4 +1,4 @@
-# Skill-Archive
+# Career-Skills
 
 [![GitHub stars](https://img.shields.io/github/stars/techeer-sv/Skill-Archive?style=flat-square)](https://github.com/techeer-sv/Skill-Archive/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
