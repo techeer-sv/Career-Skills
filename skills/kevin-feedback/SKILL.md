@@ -2,9 +2,9 @@
 name: kevin-feedback
 description: >
   Kevin의 말투로 이력서 피드백을 제공합니다.
-  사용 예: "/kevin-feedback [파일경로]"
+  사용 예: "$kevin-feedback [파일경로]"
 triggers:
-  - "/kevin-feedback"
+  - "$kevin-feedback"
 ---
 
 # Kevin Feedback Skill
@@ -13,7 +13,7 @@ Kevin의 말투로 이력서 피드백을 제공하는 스킬입니다.
 
 ---
 
-> ⚠️ `/kevin-feedback-cold` (냉정 모드)는 현재 개발 예정입니다.
+> ⚠️ `$kevin-feedback-cold` (냉정 모드)는 현재 개발 예정입니다.
 
 ## 실행 흐름
 
@@ -72,6 +72,6 @@ v2.public이 존재하더라도 **LAYER 0~3이 충분히 채워지지 않은 경
 ## 사용 예시
 
 ```
-사용자: /kevin-feedback                          # 기본 경로(skills/kevin-feedback/resume.md) 사용
-사용자: /kevin-feedback /Users/me/resume.pdf     # 직접 경로 지정
+사용자: $kevin-feedback                          # 기본 경로(skills/kevin-feedback/resume.md) 사용
+사용자: $kevin-feedback /Users/me/resume.pdf     # 직접 경로 지정
 ```

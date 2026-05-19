@@ -11,9 +11,9 @@ Kevin의 Slack 메시지를 수집·분석하여 만든 스타일 프로파일�
 이력서 파일 경로를 함께 입력하시면 됩니다.
 
 ```
-/kevin-feedback [파일경로]
-/kevin-feedback ~/Documents/my-resume.md
-/kevin-feedback ./resume.pdf
+$kevin-feedback [파일경로]
+$kevin-feedback ~/Documents/my-resume.md
+$kevin-feedback ./resume.pdf
 ```
 
 별도 설정 없이 바로 사용 가능합니다.
@@ -60,4 +60,4 @@ kevin-feedback/
 
 ## 사전 조건
 
-- **Claude Code** 환경
+- **Codex/OMX** 환경

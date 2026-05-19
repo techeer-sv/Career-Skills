@@ -23,7 +23,7 @@ user-invocable: true
 
 ### Step 0: 평가 프레임워크 로딩 (선택)
 
-다음 파일을 Read 도구로 읽는다 (프로젝트 내 또는 `~/.claude/skills/` 경로):
+다음 파일을 읽는다 (프로젝트 내 또는 `~/.codex/skills/` 경로):
 - `hiring-common/evaluation-framework.md`
 - 읽을 수 없어도 위의 인라인 판정 기준으로 진행 가능
 
@@ -35,7 +35,7 @@ user-invocable: true
 
 **채용 공고 (선택):**
 - "채용 공고가 있으면 내용을 붙여넣어주세요. URL도 가능합니다. (없으면 '없음')"
-- URL 제공 시 WebFetch 시도. 실패하면 직접 붙여넣기 요청.
+- URL 제공 시 웹 페이지 읽기 시도. 실패하면 직접 붙여넣기 요청.
 
 ### Step 2: 포트폴리오 파싱
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// Skill-Archive skill injector hook for Claude Code.
+// Skill-Archive skill injector hook for Codex/OMX.
 // Source: https://github.com/leesanghun/Skill-Archive
 //
 // Scans skill directories for SKILL.md files with `triggers:` in YAML
@@ -8,9 +8,11 @@
 // skill content into context.
 //
 // Scan order:
-//   1. {cwd}/.claude/skills/*/SKILL.md  — project-local skills
-//   2. ~/.claude/skills/*/SKILL.md      — global skills (Skill-Archive installs here)
-//   3. {cwd}/.claude/commands/*.md      — legacy commands (backward compat)
+//   1. {cwd}/.codex/skills/*/SKILL.md   — project-local Codex skills
+//   2. ~/.codex/skills/*/SKILL.md       — global Codex skills (Skill-Archive installs here)
+//   3. {cwd}/.claude/skills/*/SKILL.md  — legacy Claude skills (backward compat)
+//   4. ~/.claude/skills/*/SKILL.md      — legacy global Claude skills (backward compat)
+//   5. {cwd}/.claude/commands/*.md      — legacy commands (backward compat)
 //
 // Also scans flat .md files directly inside each skills/ directory.
 //
@@ -48,9 +50,10 @@ function parseYamlFrontmatter(content) {
       .filter(Boolean);
   }
 
-  // Fallback: use name as trigger if no explicit triggers
+  // Fallback: support both Codex/OMX ($name) and Claude Code (/name).
   if (triggers.length === 0 && name) {
-    triggers = ["/" + name.toLowerCase()];
+    const lowerName = name.toLowerCase();
+    triggers = ["$" + lowerName, "/" + lowerName];
   }
 
   if (triggers.length === 0) return null;
@@ -95,6 +98,10 @@ function findSkillFiles(cwd) {
   const seen = new Set();
 
   // skills/*/SKILL.md (new standard) + skills/*.md (flat fallback)
+  scanSkillsDir(join(cwd, ".codex", "skills"), files, seen);
+  scanSkillsDir(join(homedir(), ".codex", "skills"), files, seen);
+
+  // Legacy Claude Code locations remain readable during migration.
   scanSkillsDir(join(cwd, ".claude", "skills"), files, seen);
   scanSkillsDir(join(homedir(), ".claude", "skills"), files, seen);
 

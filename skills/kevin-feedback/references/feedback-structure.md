@@ -62,7 +62,7 @@
 
 ## 출력 형식 예시
 
-### 일반 모드 (`/kevin-feedback`)
+### 일반 모드 (`$kevin-feedback`)
 
 ```
 ## 이력서 피드백 by Kevin
@@ -102,7 +102,7 @@
 
 ---
 
-### 냉정 모드 (`/kevin-feedback-cold`)
+### 냉정 모드 (`$kevin-feedback-cold`)
 
 ```
 ## 이력서 피드백 by Kevin (냉정 모드)
