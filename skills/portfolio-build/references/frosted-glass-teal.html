@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Deck · Frosted Glass (Teal/Blue)</title>
+  <link rel="icon" href="data:," />
+  <!--
+    ============================================================================
+    REFERENCE · Frosted-Glass (teal/blue) 개발자 포트폴리오 슬라이드 덱 — 디자인 레퍼런스
+    ----------------------------------------------------------------------------
+    이 파일은 "디자인" 레퍼런스다. 범용 슬라이드 10종을 실제처럼 채워 둔 완성형이며,
+    그대로 열면 왼쪽에 슬라이드 미리보기(썸네일 레일)가 뜨는 프레젠테이션이 된다.
+
+    플레이스홀더 규칙 (다른 레퍼런스와 동일):
+      - [대괄호] = 사용자가 바꿔야 하는 값. 예: [이름], [회사명], [github.com/username]
+      - 나머지 샘플 문구/수치 = 톤을 보여주는 예시. 실제 값으로 교체한다.
+      - 이미지 자리 = <div class="ph"><span>안내 · 비율</span></div>. 실제 이미지는
+        <div class="figure fill"><img class="shot" src="./assets/..." alt="..."></div> 로 교체.
+        레일 하단 "가이드 숨기기"로 안내 라벨(--guide-display)을 한 번에 끌 수 있다.
+      - 각 <section> 의 data-speaker-notes = 그 슬라이드를 어떻게 채울지에 대한 지침.
+
+    범용성: 특정 직무/프로젝트에 고정된 슬라이드를 넣지 않는다. 특수 슬라이드·디테일은
+    SKILL.md 프롬프트나 사용자 요청으로 별도 제작한다. 이 파일은 디자인 톤의 기준일 뿐.
+
+    슬라이드(<section class="slide">) = 1장. 프로젝트/항목 수에 맞춰 복제·삭제한다.
+    테마색은 :root { --accent } 하나로 바꾼다.
+    ============================================================================
+  -->
+  <style>
+    :root {
+      --ink: #1c2740;
+      --muted: #63718a;
+      --card: rgba(255, 255, 255, 0.78);
+      --line: rgba(89, 114, 145, 0.24);
+      --blue: #246bff;
+      --blue-2: #1e5fe0;
+      --navy: #233150;
+      --teal: #1194a8;
+      --green: #17864a;
+      --amber: #e08a2b;
+      --accent: #246bff;                 /* 테마 강조색: 이 한 줄만 바꾸면 전체 톤 변경 */
+      --guide-display: block;            /* 이미지 안내 라벨 표시 여부 (레일 토글로 none 전환) */
+      --slide-bg:
+        radial-gradient(1200px 700px at 8% -6%, rgba(120, 190, 235, 0.34), transparent 60%),
+        radial-gradient(1100px 800px at 104% 108%, rgba(150, 205, 220, 0.28), transparent 60%),
+        linear-gradient(158deg, #e2eef7 0%, #eef6fb 48%, #e6f1f6 100%);
+    }
+    * { box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%; margin: 0; overflow: hidden;
+      color: var(--ink);
+      font-family: Pretendard, Inter, "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55; background: #0d1524;
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all; overflow-wrap: break-word;
+    }
+
+    /* ===================== deck shell (rail + stage) ===================== */
+    body { display: flex; height: 100vh; }
+    .rail {
+      width: 200px; flex: none; height: 100vh; overflow-y: auto;
+      background: #0d1524; border-right: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 12px 16px; display: flex; flex-direction: column; gap: 11px;
+    }
+    .rail-title { color: #8ea0bd; font: 800 11px/1.3 Inter, system-ui, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; padding: 2px 4px 4px; }
+    .thumb {
+      position: relative; aspect-ratio: 16 / 9; border-radius: 9px; overflow: hidden; cursor: pointer;
+      border: 2px solid transparent; background: #0b1120; box-shadow: 0 2px 8px rgba(0,0,0,0.34);
+      padding: 0; transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .thumb:hover { transform: translateY(-1px); }
+    .thumb.active { border-color: var(--accent); }
+    .thumb .mini { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .thumb .mini .slide { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 1 !important; visibility: visible !important; transition: none; pointer-events: none; }
+    .thumb .cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; justify-content: space-between; gap: 5px; align-items: baseline; padding: 12px 7px 4px; font: 700 9px/1.2 Inter, system-ui, sans-serif; color: #fff; background: linear-gradient(transparent, rgba(6,10,20,0.86)); }
+    .thumb .cap .n { font-weight: 800; opacity: 0.85; }
+    .thumb .cap .l { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rail-btn { margin-top: auto; flex: none; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.06); color: #b7c4da; font: 700 11px Inter, system-ui, sans-serif; border-radius: 8px; padding: 9px 10px; cursor: pointer; }
+    .rail-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .viewport { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: radial-gradient(1200px 800px at 50% -8%, #1a2942, #0b111e); }
+    .stage { position: relative; width: 1280px; height: 720px; flex: none; transform-origin: center center; border-radius: 6px; overflow: hidden; box-shadow: 0 30px 90px rgba(0,0,0,0.5); }
+
+    /* ---------- slide frame (fills the stage; container-query sized) ---------- */
+    .slide {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      container-type: size; overflow: hidden;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.35s ease; background: var(--slide-bg);
+    }
+    .slide.active { opacity: 1; visibility: visible; pointer-events: auto; z-index: 1; }
+    .slide::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.5) 0.5px, transparent 0.6px);
+      background-size: 5px 5px; opacity: 0.28; mix-blend-mode: overlay;
+    }
+    .pad { position: absolute; inset: 0; padding: 5.6cqh 5cqw; display: flex; flex-direction: column; }
+
+    /* ---------- shared type ---------- */
+    h1, h2, h3, h4, p { margin: 0; }
+    .watermark { position: absolute; top: 4.6cqh; right: 5cqw; color: #8091a8; font-size: 1.75cqh; font-weight: 600; letter-spacing: 0.02em; z-index: 2; }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; color: var(--blue-2); background: rgba(36,107,255,0.08); padding: 0.08em 0.32em; border-radius: 4px; }
+    .hl { color: var(--blue-2); font-weight: 800; }
+    .lead-p, .result-card p, .xp p, .panel p, .figcap, .blist li, .mcard small, .trace-row .tx, .head-title .sub, .tl-card p, .pj-card p, .toc-item .tt { text-wrap: balance; }
+
+    /* ---------- slide header ---------- */
+    .head { display: grid; grid-template-columns: auto 1fr; gap: 2cqw; align-items: center; margin-bottom: 3cqh; flex: none; }
+    .folder {
+      position: relative; width: 7.4cqh; height: 7.4cqh; border-radius: 1.2cqh;
+      display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 2.7cqh; font-style: italic;
+      background: linear-gradient(150deg, var(--accent) 0%, #1b57cf 100%);
+      box-shadow: 0 6px 16px rgba(29, 87, 207, 0.38), inset 0 2px 3px rgba(255, 255, 255, 0.55); flex: none;
+    }
+    .folder::before { content: ""; position: absolute; top: -0.9cqh; left: 0.8cqh; width: 3cqh; height: 1.4cqh; border-radius: 0.6cqh 0.6cqh 0 0; background: var(--accent); }
+    .head-title .k { color: var(--accent); font-size: 2cqh; font-weight: 700; letter-spacing: 0.01em; }
+    .head-title h2 { color: var(--navy); font-size: 4.2cqh; font-weight: 900; line-height: 1.03; letter-spacing: -0.01em; }
+    .head-title .sub { margin-top: 0.7cqh; color: var(--muted); font-size: 1.9cqh; font-weight: 600; }
+
+    .body-area { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+    .lead-p { color: #40506a; font-size: 1.95cqh; line-height: 1.6; margin-bottom: 2.4cqh; flex: none; }
+    .lead-p b { color: var(--blue-2); font-weight: 800; }
+
+    /* ---------- metric cards ---------- */
+    .metrics { display: grid; gap: 1.3cqw; margin-bottom: 2.8cqh; flex: none; }
+    .metrics.c3 { grid-template-columns: repeat(3, 1fr); }
+    .metrics.c4 { grid-template-columns: repeat(4, 1fr); }
+    .metrics.c5 { grid-template-columns: repeat(5, 1fr); }
+    .mcard { border: 1px solid var(--line); border-radius: 1.4cqh; background: rgba(255, 255, 255, 0.74); box-shadow: 0 8px 22px rgba(45, 82, 115, 0.09); padding: 2.2cqh 1.3cqw; text-align: center; min-width: 0; }
+    .mcard strong { display: block; color: var(--accent); font-size: 2.8cqh; font-weight: 900; line-height: 1.05; overflow-wrap: anywhere; }
+    .mcard span { display: block; margin-top: 0.8cqh; color: var(--navy); font-size: 1.8cqh; font-weight: 800; }
+    .mcard small { display: block; margin-top: 0.4cqh; color: var(--muted); font-size: 1.45cqh; line-height: 1.35; }
+
+    /* ---------- columns / panels ---------- */
+    .cols { display: grid; gap: 1.8cqw; flex: 1; min-height: 0; align-items: stretch; }
+    .cols.two { grid-template-columns: 1fr 1fr; }
+    .cols.wt { grid-template-columns: 0.86fr 1.14fr; }
+    .stack { display: flex; flex-direction: column; min-height: 0; gap: 1.6cqh; }
+    .stack.center { justify-content: center; }
+    .panel { border: 1px solid var(--line); border-radius: 1.5cqh; background: var(--card); box-shadow: 0 10px 26px rgba(45, 82, 115, 0.09); padding: 2.4cqh 1.7cqw; min-width: 0; min-height: 0; display: flex; flex-direction: column; }
+    .panel h3 { color: var(--navy); font-size: 2.2cqh; font-weight: 800; margin-bottom: 1.3cqh; flex: none; }
+    .panel p { color: #45526a; font-size: 1.85cqh; line-height: 1.62; }
+    .divider { height: 1px; background: var(--line); margin: 1.7cqh 0; flex: none; }
+    .sub-label { color: var(--accent); font-size: 1.7cqh; font-weight: 800; margin-bottom: 1cqh; flex: none; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.7cqh 0.55cqw; }
+    .chips span { display: inline-flex; align-items: center; padding: 0.6cqh 0.75cqw; border: 1px solid rgba(83, 105, 135, 0.24); border-radius: 999px; background: rgba(255, 255, 255, 0.7); color: #29334a; font-size: 1.5cqh; font-weight: 700; }
+
+    /* ---------- image placeholder (guide label toggled by --guide-display) ---------- */
+    .figure { display: flex; flex-direction: column; min-height: 0; }
+    .figure.fill { flex: 1; }
+    .figure .shot { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; margin: auto; border-radius: 1.2cqh; border: 1px solid rgba(89, 114, 145, 0.2); box-shadow: 0 16px 38px rgba(37, 78, 119, 0.22); }
+    .ph { width: 100%; height: 100%; min-height: 12cqh; border-radius: 1.2cqh; border: 1px solid var(--line); background: linear-gradient(140deg, rgba(231, 240, 250, 0.75), rgba(238, 235, 251, 0.75)); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6); }
+    .ph span { color: #8794ab; font-size: 1.7cqh; font-weight: 600; display: var(--guide-display, block); }
+    .figcap { margin-top: 1cqh; color: var(--muted); font-size: 1.58cqh; font-weight: 600; line-height: 1.45; text-align: center; flex: none; }
+    .figcap.left { text-align: left; }
+    .tcap { color: var(--navy); font-size: 1.75cqh; font-weight: 800; margin-bottom: 1.1cqh; flex: none; }
+
+    /* ---------- tables ---------- */
+    .table-block { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+    .table-card { border: 1px solid var(--line); border-radius: 1.2cqh; background: rgba(255, 255, 255, 0.82); box-shadow: 0 10px 26px rgba(45, 82, 115, 0.1); overflow: hidden; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 1.62cqh; }
+    th, td { padding: 1.5cqh 1.15cqw; text-align: left; vertical-align: middle; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+    thead th { border-top: none; color: var(--navy); background: rgba(241, 202, 122, 0.34); font-weight: 800; font-size: 1.56cqh; letter-spacing: 0.01em; }
+    tbody tr:nth-child(even) td { background: rgba(233, 241, 249, 0.6); }
+    td:last-child { font-weight: 700; color: #2b3852; }
+    table.compact th, table.compact td { padding: 1.12cqh 1cqw; }
+    .up { color: var(--blue-2); font-weight: 800; }
+    .down { color: var(--green); font-weight: 800; }
+
+    /* ---------- trace (문제/해결/결과) ---------- */
+    .trace { display: grid; gap: 1.1cqh; }
+    .trace.lg { gap: 1.7cqh; }
+    .trace-row { display: grid; grid-template-columns: auto 1fr; gap: 0.9cqw; align-items: baseline; }
+    .trace-row .tk { color: #fff; font-size: 1.55cqh; font-weight: 800; padding: 0.55cqh 0.9cqw; border-radius: 0.6cqh; white-space: nowrap; }
+    .trace-row .tk.p { background: var(--amber); }
+    .trace-row .tk.s { background: var(--accent); }
+    .trace-row .tk.r { background: var(--teal); }
+    .trace-row .tx { color: #45526a; font-size: 1.86cqh; line-height: 1.5; }
+    .trace-row .tx b { color: var(--blue-2); font-weight: 800; }
+
+    /* ---------- concerns (troubleshooting) ---------- */
+    .concerns { display: grid; grid-template-columns: 1fr; grid-auto-rows: 1fr; gap: 1.4cqh; flex: 1; min-height: 0; }
+    .concern { position: relative; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0.9cqh; background: rgba(255, 255, 255, 0.7); padding: 1.8cqh 1.5cqw; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+    .concern.wide { grid-column: 1 / -1; }
+    .concern .n { color: var(--accent); font-size: 1.5cqh; font-weight: 900; letter-spacing: 0.08em; }
+    .concern h3 { color: var(--navy); font-size: 1.98cqh; font-weight: 800; margin: 0.2cqh 0 0.6cqh; }
+    .concern p { color: #47556c; font-size: 1.62cqh; line-height: 1.5; }
+    .concern b { color: var(--blue-2); font-weight: 800; }
+
+    /* ---------- bullet + experience list ---------- */
+    .blist { list-style: none; padding: 0; margin: 0; display: grid; gap: 1cqh; }
+    .blist li { position: relative; padding-left: 1.3cqw; color: #45526a; font-size: 1.74cqh; line-height: 1.5; }
+    .blist li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 0.75cqh; height: 0.75cqh; border-radius: 999px; background: var(--teal); }
+    .blist li b { color: var(--blue-2); }
+    .xp { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; flex: 1; min-height: 0; }
+    .xp > li { padding: 1.9cqh 0; border-top: 1px solid var(--line); }
+    .xp > li:first-child { border-top: none; padding-top: 0; }
+    .xp > li:last-child { padding-bottom: 0; }
+    .xp .xh { display: flex; align-items: baseline; gap: 0.8cqw; margin-bottom: 0.7cqh; }
+    .xp .xh h3 { color: var(--navy); font-size: 2.1cqh; font-weight: 800; margin: 0; }
+    .xp .xh .yr { color: var(--muted); font-size: 1.5cqh; font-weight: 700; }
+    .xp p { color: #45526a; font-size: 1.68cqh; line-height: 1.54; margin: 0; }
+    .xp p b { color: var(--blue-2); font-weight: 800; }
+
+    /* ---------- TOC ---------- */
+    .toc { display: grid; grid-template-columns: 1.32fr 0.68fr; gap: 1.8cqw; flex: 1; min-height: 0; }
+    .toc-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2cqh 1.3cqw; align-content: center; }
+    .toc-item { display: flex; align-items: center; gap: 1cqw; border: 1px solid var(--line); border-radius: 1.3cqh; background: rgba(255, 255, 255, 0.72); padding: 1.7cqh 1.4cqw; box-shadow: 0 12px 30px -20px rgba(45, 82, 115, 0.4); }
+    .toc-item .no { color: var(--accent); font-size: 2.4cqh; font-weight: 900; letter-spacing: -0.02em; }
+    .toc-item .tt { color: var(--navy); font-size: 2cqh; font-weight: 700; }
+    .about-card { border-radius: 1.6cqh; background: linear-gradient(150deg, var(--accent), #1747c9); color: #fff; padding: 2.8cqh 1.9cqw; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 24px 54px -30px rgba(29, 87, 207, 0.6); }
+    .about-card .k { font-size: 1.7cqh; font-weight: 800; letter-spacing: 0.12em; color: rgba(255,255,255,0.72); }
+    .about-card p { font-size: 2cqh; line-height: 1.6; font-weight: 500; }
+    .about-card .meta { font-size: 1.55cqh; line-height: 1.7; color: rgba(255,255,255,0.82); font-weight: 600; }
+
+    /* ---------- timeline ---------- */
+    .tl { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4cqw; flex: 1; min-height: 0; }
+    .tl-card { border: 1px solid var(--line); border-radius: 1.5cqh; background: rgba(255, 255, 255, 0.74); padding: 2.2cqh 1.5cqw; display: flex; flex-direction: column; gap: 1cqh; box-shadow: 0 14px 34px -24px rgba(45, 82, 115, 0.5); }
+    .tl-card.accent { background: linear-gradient(150deg, var(--accent), #1747c9); }
+    .tl-head { display: flex; align-items: center; gap: 0.9cqw; }
+    .tl-dot { width: 1.3cqh; height: 1.3cqh; border-radius: 999px; background: var(--accent); flex: none; }
+    .tl-card.accent .tl-dot { background: #fff; }
+    .tl-card .per { color: var(--accent); font-size: 1.7cqh; font-weight: 800; }
+    .tl-card h3 { color: var(--navy); font-size: 2.5cqh; font-weight: 800; }
+    .tl-card .role { color: var(--muted); font-size: 1.55cqh; font-weight: 600; }
+    .tl-card p { color: #45526a; font-size: 1.68cqh; line-height: 1.55; }
+    .tl-metric { margin-top: auto; padding-top: 1.3cqh; border-top: 1px solid var(--line); display: flex; align-items: baseline; gap: 0.8cqw; }
+    .tl-metric b { color: var(--navy); font-size: 2.7cqh; font-weight: 900; }
+    .tl-metric span { color: var(--muted); font-size: 1.45cqh; }
+    .tl-card.accent .per, .tl-card.accent h3, .tl-card.accent .role, .tl-card.accent p, .tl-metric span, .tl-card.accent .tl-metric b { color: #fff; }
+    .tl-card.accent .role, .tl-card.accent p, .tl-card.accent .per { color: rgba(255,255,255,0.85); }
+    .tl-card.accent .tl-metric { border-top-color: rgba(255,255,255,0.28); }
+    .tl-card.accent .tl-metric span { color: rgba(255,255,255,0.78); }
+
+    /* ---------- project cards ---------- */
+    .pj { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4cqw; flex: 1; min-height: 0; }
+    .pj-card { border: 1px solid var(--line); border-radius: 1.5cqh; background: rgba(255, 255, 255, 0.74); padding: 1.4cqh 1.4cqw 1.6cqh; display: flex; flex-direction: column; gap: 1.2cqh; box-shadow: 0 14px 34px -24px rgba(45, 82, 115, 0.5); }
+    .pj-thumb { height: 24cqh; border-radius: 1.2cqh; border: 1px solid var(--line); background: linear-gradient(140deg, #eaf0fb, #f0eefb); display: flex; align-items: center; justify-content: center; flex: none; }
+    .pj-thumb span { color: #8794ab; font-size: 1.5cqh; font-weight: 600; display: var(--guide-display, block); }
+    .pj-card .meta { color: var(--muted); font-size: 1.5cqh; font-weight: 600; }
+    .pj-card h3 { color: var(--navy); font-size: 2.3cqh; font-weight: 800; }
+    .pj-card p { color: #45526a; font-size: 1.6cqh; line-height: 1.5; }
+    .pj-card .chips { margin-top: auto; }
+
+    /* ===================== COVER ===================== */
+    .cover .pad { align-items: center; justify-content: center; }
+    .cover .top-name { position: absolute; top: 4.8cqh; right: 5cqw; color: #5b6b86; font-size: 1.85cqh; font-weight: 600; z-index: 2; }
+    .cover-card { position: relative; width: min(84cqw, 100%); border: 1px solid var(--line); border-radius: 2cqh; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(12px); box-shadow: 0 28px 80px rgba(37, 78, 119, 0.18); padding: 6cqh 4.6cqw; overflow: hidden; }
+    .cover-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), transparent 40%), radial-gradient(circle at 72% 12%, rgba(36, 107, 255, 0.14), transparent 42%); }
+    .cover-card > * { position: relative; }
+    .cover .eyebrow { color: #6b7890; font-size: 1.7cqh; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 2.4cqh; }
+    .cover h1 { color: #2b3348; font-size: 9cqh; font-weight: 900; line-height: 0.96; }
+    .cover h1 .en { display: block; color: #5b6a86; font-size: 0.34em; font-weight: 800; font-style: italic; letter-spacing: 0.05em; margin-top: 0.42em; }
+    .cover .subtitle { color: #556176; font-size: 2.4cqh; font-weight: 600; margin: 1.8cqh 0 3.4cqh; }
+    .cover .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4cqw; margin-bottom: 3cqh; }
+    .cover .mc { border: 1px solid var(--line); border-radius: 1.3cqh; background: rgba(255, 255, 255, 0.72); box-shadow: 0 8px 22px rgba(45, 82, 115, 0.1); padding: 2.6cqh 1.4cqw; }
+    .cover .mc strong { display: block; color: var(--accent); font-size: 2.9cqh; font-weight: 900; line-height: 1.05; }
+    .cover .mc span { display: block; margin-top: 0.9cqh; color: var(--navy); font-size: 1.7cqh; font-weight: 800; }
+    .cover .mc small { display: block; margin-top: 0.4cqh; color: var(--muted); font-size: 1.4cqh; line-height: 1.35; }
+    .cover .contact-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4cqw; padding-top: 2.6cqh; border-top: 1px solid var(--line); }
+    .cover .contact-row .l { color: var(--navy); font-size: 1.5cqh; font-weight: 800; }
+    .cover .contact-row .v { color: #46536a; font-size: 1.75cqh; margin-top: 0.4cqh; }
+
+    /* ===================== CLOSING ===================== */
+    .closing .pad { align-items: center; justify-content: center; text-align: center; }
+    .closing h1 { color: #24417a; font-size: 10.5cqh; font-weight: 900; font-style: italic; letter-spacing: 0.02em; }
+    .closing .ty-sub { color: var(--navy); font-size: 2.7cqh; font-weight: 800; margin-top: 1.2cqh; }
+    .closing .cc { margin-top: 4.2cqh; display: grid; gap: 1.3cqh; justify-content: center; font-size: 2.1cqh; color: #37455e; }
+    .closing .cc div { display: flex; gap: 1cqw; align-items: baseline; }
+    .closing .cc b { color: var(--accent); min-width: 7cqw; text-align: right; font-weight: 700; }
+    .closing .end-name { position: absolute; bottom: 4.4cqh; left: 0; right: 0; text-align: center; color: #5b6b86; font-size: 1.85cqh; }
+  </style>
+</head>
+<body>
+  <aside class="rail" id="rail" aria-label="슬라이드 미리보기">
+    <div class="rail-title">Slides · 미리보기</div>
+    <!-- 썸네일은 JS가 각 슬라이드를 축소 복제해 채운다 -->
+    <button class="rail-btn" id="guideToggle" type="button">가이드 숨기기</button>
+  </aside>
+
+  <main class="viewport" id="viewport">
+    <div class="stage" id="stage">
+
+      <!-- 01 · COVER ------------------------------------------------------- -->
+      <section class="slide cover" data-label="표지" data-screen-label="01"
+        data-speaker-notes="표지: 이름·직군·한 줄 소개 + 대표 성과 3개. 수치는 본문에서 다시 증명되는 값으로.">
+        <span class="top-name">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="cover-card">
+            <div class="eyebrow">Backend Engineer · Portfolio 2026</div>
+            <h1>[이름]<span class="en">[NAME]</span></h1>
+            <p class="subtitle">트래픽이 몰리는 순간에도 흔들리지 않는 서비스를 만듭니다. [본인을 한 줄로]</p>
+            <div class="metric-grid">
+              <div class="mc"><strong>4.2s → 69ms</strong><span>주문 p95 응답</span><small>[대표 성과 — 본문에서 증명]</small></div>
+              <div class="mc"><strong>−78%</strong><span>배치 실행 시간</span><small>[42분 → 9분]</small></div>
+              <div class="mc"><strong>0건 유실</strong><span>장애 후 이벤트</span><small>[무손실 파이프라인]</small></div>
+            </div>
+            <div class="contact-row">
+              <div><div class="l">Phone</div><div class="v">[010-0000-0000]</div></div>
+              <div><div class="l">Email</div><div class="v">[name@example.com]</div></div>
+              <div><div class="l">GitHub</div><div class="v">[github.com/username]</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 · CONTENTS ---------------------------------------------------- -->
+      <section class="slide" data-label="목차" data-screen-label="02"
+        data-speaker-notes="목차: 6개 섹션. 오른쪽 카드에 포지셔닝 한 문단. 섹션 수는 실제 구성에 맞춘다.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">i</div>
+            <div class="head-title"><div class="k">Contents</div><h2>목차</h2></div>
+          </div>
+          <div class="toc">
+            <div class="toc-list">
+              <div class="toc-item"><span class="no">01</span><span class="tt">경력 및 성장 과정</span></div>
+              <div class="toc-item"><span class="no">02</span><span class="tt">주요 프로젝트</span></div>
+              <div class="toc-item"><span class="no">03</span><span class="tt">성과 지표</span></div>
+              <div class="toc-item"><span class="no">04</span><span class="tt">성능 개선 전후</span></div>
+              <div class="toc-item"><span class="no">05</span><span class="tt">트러블슈팅 기록</span></div>
+              <div class="toc-item"><span class="no">06</span><span class="tt">교육 · 자격 · 수상</span></div>
+            </div>
+            <div class="about-card">
+              <div class="k">ABOUT ME</div>
+              <p>데이터 정합성과 응답 속도를 함께 지키는 서버를 설계합니다. [본인의 강점을 두 문장으로]</p>
+              <div class="meta">경력 [3년 · 신입/주니어]<br />[name@example.com]</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 · CAREER TIMELINE --------------------------------------------- -->
+      <section class="slide" data-label="경력" data-screen-label="03"
+        data-speaker-notes="타임라인: 시간순. 각 구간은 '맡은 범위 + 바꾼 결과' 한 줄 + 대표 수치. 가장 강조할 구간은 accent 카드.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">01</div>
+            <div class="head-title"><div class="k">Career</div><h2>경력 타임라인</h2><div class="sub">2023 — 2026</div></div>
+          </div>
+          <div class="tl">
+            <div class="tl-card">
+              <div class="tl-head"><span class="tl-dot"></span><span class="per">2023.03 — 2024.02</span></div>
+              <h3>[회사명 / 부트캠프]</h3>
+              <span class="role">백엔드 인턴 · Java, Spring Boot</span>
+              <p>사내 정산 배치를 재작성해 실행 시간을 42분에서 9분으로 단축.</p>
+              <div class="tl-metric"><b>−78%</b><span>배치 실행 시간</span></div>
+            </div>
+            <div class="tl-card">
+              <div class="tl-head"><span class="tl-dot"></span><span class="per">2024.03 — 2025.06</span></div>
+              <h3>[회사명]</h3>
+              <span class="role">주니어 서버 개발자 · Kotlin, MySQL</span>
+              <p>주문 API를 담당하며 일 120만 건 트래픽을 무중단으로 처리.</p>
+              <div class="tl-metric"><b>120만</b><span>일 처리 요청</span></div>
+            </div>
+            <div class="tl-card accent">
+              <div class="tl-head"><span class="tl-dot"></span><span class="per">2025.07 — 현재</span></div>
+              <h3>[회사명]</h3>
+              <span class="role">[현재 직무 · 기술 스택]</span>
+              <p>[현재 소속과 담당 범위. 가장 강조할 구간을 컬러 카드로.]</p>
+              <div class="tl-metric"><b>[지표]</b><span>[설명]</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 · PROJECTS OVERVIEW ------------------------------------------- -->
+      <section class="slide" data-label="프로젝트 개요" data-screen-label="04"
+        data-speaker-notes="개요: 3개까지. 카드 구조(썸네일·기간·역할·한 줄·기술)를 동일하게 유지.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">02</div>
+            <div class="head-title"><div class="k">Projects</div><h2>주요 프로젝트</h2><div class="sub">03 Projects</div></div>
+          </div>
+          <div class="pj">
+            <div class="pj-card">
+              <div class="pj-thumb"><span>썸네일 · 16:9</span></div>
+              <div class="meta">2025.09 · 팀 4명</div>
+              <h3>주문 정산 자동화</h3>
+              <p>수기 정산 프로세스를 배치 파이프라인으로 전환.</p>
+              <div class="chips"><span>Kotlin</span><span>Spring Batch</span><span>MySQL</span></div>
+            </div>
+            <div class="pj-card">
+              <div class="pj-thumb"><span>썸네일 · 16:9</span></div>
+              <div class="meta">2025.03 · 팀 6명</div>
+              <h3>[프로젝트명]</h3>
+              <p>[무엇을 만들었는지 한 문장 · 성과 숫자 포함]</p>
+              <div class="chips"><span>[기술]</span><span>[기술]</span><span>[기술]</span></div>
+            </div>
+            <div class="pj-card">
+              <div class="pj-thumb"><span>썸네일 · 16:9</span></div>
+              <div class="meta">[기간 · 팀 규모]</div>
+              <h3>[프로젝트명]</h3>
+              <p>[무엇을 만들었는지 한 문장 · 성과 숫자 포함]</p>
+              <div class="chips"><span>[기술]</span><span>[기술]</span><span>[기술]</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 · PROJECT DETAIL ---------------------------------------------- -->
+      <section class="slide" data-label="프로젝트 상세" data-screen-label="05"
+        data-speaker-notes="상세: 대표 수치 + 개요 + 아키텍처. 프로젝트가 여러 개면 이 슬라이드를 복제.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">02</div>
+            <div class="head-title"><div class="k">Project · [프로젝트명]</div><h2>주문 정산 자동화</h2><div class="sub">개인/팀 · 역할 [담당 범위] &nbsp;|&nbsp; 2025.09 — 2025.12</div></div>
+          </div>
+          <div class="metrics c4">
+            <div class="mcard"><strong>−78%</strong><span>배치 실행 시간</span><small>42분 → 9분</small></div>
+            <div class="mcard"><strong>0건</strong><span>정산 누락</span><small>검증 파이프라인</small></div>
+            <div class="mcard"><strong>[지표]</strong><span>[설명]</span><small>[근거]</small></div>
+            <div class="mcard"><strong>[지표]</strong><span>[설명]</span><small>[근거]</small></div>
+          </div>
+          <div class="cols wt">
+            <div class="panel">
+              <h3>Overview</h3>
+              <p>[프로젝트 한 문단 — 무엇을, 왜, 어떻게 만들었는지. 본인 역할과 핵심 의사결정을 담는다.]</p>
+              <div class="divider"></div>
+              <div class="sub-label">Tech Stack</div>
+              <div class="chips"><span>Kotlin</span><span>Spring Batch</span><span>MySQL</span><span>[기술]</span><span>[기술]</span></div>
+            </div>
+            <div class="stack center" style="gap:1cqh;">
+              <div class="tcap">System Architecture</div>
+              <div class="figure fill"><div class="ph"><span>아키텍처 다이어그램 · 16:9</span></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 · METRICS ----------------------------------------------------- -->
+      <section class="slide" data-label="성과 지표" data-screen-label="06"
+        data-speaker-notes="성과: 핵심 KPI를 큰 숫자로. 각 숫자는 '무엇을 측정했고 무엇을 증명하는지' 한 줄 해석.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">03</div>
+            <div class="head-title"><div class="k">Impact</div><h2>성과 지표</h2></div>
+          </div>
+          <p class="lead-p">숫자는 <b>맥락과 근거</b>가 있을 때만 힘을 가집니다. 아래 지표는 각각 표·대시보드로 뒷받침됩니다. [측정 방법 한 줄]</p>
+          <div class="metrics c4" style="margin-bottom:0;flex:1;align-items:stretch;">
+            <div class="mcard" style="display:flex;flex-direction:column;justify-content:center;"><strong>−78%</strong><span>배치 실행 시간</span><small>42분 → 9분 · 재작성</small></div>
+            <div class="mcard" style="display:flex;flex-direction:column;justify-content:center;"><strong>120만/일</strong><span>처리 요청</span><small>무중단 처리</small></div>
+            <div class="mcard" style="display:flex;flex-direction:column;justify-content:center;"><strong>[지표]</strong><span>[설명]</span><small>[근거]</small></div>
+            <div class="mcard" style="display:flex;flex-direction:column;justify-content:center;"><strong>[지표]</strong><span>[설명]</span><small>[근거]</small></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 · BEFORE / AFTER ---------------------------------------------- -->
+      <section class="slide" data-label="성능 비교" data-screen-label="07"
+        data-speaker-notes="개선 전후: 왼쪽 표(Before/After 수치) + 오른쪽 문제/해결/결과. 표지·본문 수치는 같은 값으로 정합.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">04</div>
+            <div class="head-title"><div class="k">Before → After</div><h2>성능 개선 전후 비교</h2></div>
+          </div>
+          <div class="cols" style="grid-template-columns:0.82fr 1.18fr;gap:1.6cqw;align-items:stretch;">
+            <div class="table-block">
+              <div class="table-card"><table class="compact">
+                <thead><tr><th>지표</th><th>Before</th><th>After</th></tr></thead>
+                <tbody>
+                  <tr><td>실행 시간</td><td>42분</td><td><span class="down">9분 (−78%)</span></td></tr>
+                  <tr><td>p95 응답</td><td>4.2s</td><td><span class="down">69ms</span></td></tr>
+                  <tr><td>실패율</td><td>10.3%</td><td><span class="down">0%</span></td></tr>
+                  <tr><td>[지표]</td><td>[전]</td><td><span class="down">[후]</span></td></tr>
+                </tbody>
+              </table></div>
+            </div>
+            <div class="panel" style="justify-content:center;">
+              <div class="trace lg">
+                <div class="trace-row"><span class="tk p">문제</span><span class="tx">[무엇이 느렸/실패했는지 — 현상과 원인 한 줄. 예: 동기 처리가 스레드를 오래 점유.]</span></div>
+                <div class="trace-row"><span class="tk s">해결</span><span class="tx">[핵심 기법 한 줄. 예: 무거운 작업을 <b>비동기 파이프라인</b>으로 분리.]</span></div>
+                <div class="trace-row"><span class="tk r">결과</span><span class="tx">[측정된 개선. 예: 실행 시간 <b>42분 → 9분</b>, 실패율 <b>0%</b>.]</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 · TROUBLESHOOTING --------------------------------------------- -->
+      <section class="slide" data-label="트러블슈팅" data-screen-label="08"
+        data-speaker-notes="트러블슈팅: '왜 이렇게 풀었는가'. 각 항목 = 문제 상황 → 대안 → 선택 근거 → 결과. 강조 항목은 wide.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">05</div>
+            <div class="head-title"><div class="k">Troubleshooting</div><h2>트러블슈팅 기록</h2></div>
+          </div>
+          <div class="concerns">
+            <div class="concern wide"><div class="n">01</div><h3>[가장 임팩트 큰 문제 — 한 줄 제목]</h3><p>[문제 상황과 원인 → 검토한 대안 → 선택 근거와 트레이드오프 → 결과 수치. 가장 강조할 항목을 wide로.]</p></div>
+            <div class="concern"><div class="n">02</div><h3>[문제 제목]</h3><p>[문제 → 해결 → 결과를 2~3문장으로. <b>핵심 수치</b>는 굵게.]</p></div>
+            <div class="concern"><div class="n">03</div><h3>[문제 제목]</h3><p>[문제 → 해결 → 결과를 2~3문장으로.]</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 · EDUCATION / CERTS / AWARDS ---------------------------------- -->
+      <section class="slide" data-label="교육·자격·수상" data-screen-label="09"
+        data-speaker-notes="교육·자격·수상: 왼쪽 활동/수상 목록 + 오른쪽 자격·역량 표. 없는 항목은 열째 삭제.">
+        <span class="watermark">[이름] · [Name]</span>
+        <div class="pad">
+          <div class="head">
+            <div class="folder">06</div>
+            <div class="head-title"><div class="k">Education & Awards</div><h2>교육 · 자격 · 수상</h2></div>
+          </div>
+          <div class="cols" style="grid-template-columns:1.05fr 0.95fr;">
+            <div class="panel">
+              <ul class="xp">
+                <li>
+                  <div class="xh"><h3>[교육 · 부트캠프 · 학위]</h3><span class="yr">2023.03 — 2023.12</span></div>
+                  <p>[무엇을 배웠고 무엇을 만들었는지 한 줄.]</p>
+                </li>
+                <li>
+                  <div class="xh"><h3>[수상 · 해커톤]</h3><span class="yr">2024</span></div>
+                  <ul class="blist">
+                    <li>[수상 내역 · 규모 · 본인 역할]</li>
+                    <li>[핵심 성과 한 줄]</li>
+                  </ul>
+                </li>
+                <li>
+                  <div class="xh"><h3>[활동 · 커뮤니티]</h3><span class="yr">상시</span></div>
+                  <p>[발표 · 스터디 · 오픈소스 기여 등.]</p>
+                </li>
+              </ul>
+            </div>
+            <div class="stack center" style="gap:1cqh;">
+              <div class="tcap">자격 · 핵심 역량</div>
+              <div class="table-card"><table class="compact">
+                <thead><tr><th>구분</th><th>내용</th><th>일자 / 증빙</th></tr></thead>
+                <tbody>
+                  <tr><td>자격증</td><td>정보처리기사</td><td>2024.05</td></tr>
+                  <tr><td>어학</td><td>[시험 · 점수]</td><td>[일자]</td></tr>
+                  <tr><td>[구분]</td><td>[내용]</td><td>[증빙]</td></tr>
+                </tbody>
+              </table></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 · CLOSING ----------------------------------------------------- -->
+      <section class="slide closing" data-label="마무리" data-screen-label="10"
+        data-speaker-notes="마무리: 감사 인사 + 연락처. 표지와 같은 연락처.">
+        <span class="end-name">[이름] · [Name]</span>
+        <div class="pad">
+          <h1>THANK YOU</h1>
+          <div class="ty-sub">읽어주셔서 감사합니다.</div>
+          <div class="cc">
+            <div><b>Phone</b> [010-0000-0000]</div>
+            <div><b>Email</b> [name@example.com]</div>
+            <div><b>GitHub</b> [github.com/username]</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    const stage = document.getElementById('stage');
+    const viewport = document.getElementById('viewport');
+    const rail = document.getElementById('rail');
+    const slides = Array.from(stage.querySelectorAll('.slide'));
+    const total = slides.length;
+    const pad2 = n => String(n).padStart(2, '0');
+    let current = 0, lastWheel = 0, touchX = null, touchY = null;
+
+    // ── build slide-preview thumbnails (scaled live clones) ──
+    const thumbs = slides.map((s, i) => {
+      const t = document.createElement('button');
+      t.className = 'thumb'; t.type = 'button';
+      t.setAttribute('aria-label', pad2(i + 1) + ' ' + (s.dataset.label || ''));
+      const mini = document.createElement('div'); mini.className = 'mini';
+      mini.appendChild(s.cloneNode(true));          // container-query units re-scale to the thumb size
+      const cap = document.createElement('div'); cap.className = 'cap';
+      cap.innerHTML = '<span class="n">' + pad2(i + 1) + '</span><span class="l">' + (s.dataset.label || '') + '</span>';
+      t.append(mini, cap);
+      t.addEventListener('click', () => show(i));
+      rail.insertBefore(t, rail.querySelector('.rail-btn'));
+      return t;
+    });
+
+    function show(i) {
+      current = Math.max(0, Math.min(total - 1, i));
+      slides.forEach((s, n) => s.classList.toggle('active', n === current));
+      thumbs.forEach((t, n) => t.classList.toggle('active', n === current));
+      thumbs[current].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      history.replaceState(null, '', '#slide-' + (current + 1));
+    }
+
+    function fitStage() {
+      const r = viewport.getBoundingClientRect();
+      const scale = Math.min((r.width - 48) / 1280, (r.height - 48) / 720);
+      stage.style.transform = 'scale(' + Math.max(scale, 0.05) + ')';
+    }
+
+    window.addEventListener('resize', fitStage);
+    viewport.addEventListener('wheel', e => {
+      const now = Date.now();
+      const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (Math.abs(delta) < 18 || now - lastWheel < 450) return;
+      e.preventDefault(); lastWheel = now;
+      show(delta > 0 ? current + 1 : current - 1);
+    }, { passive: false });
+    viewport.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; touchY = e.changedTouches[0].clientY; }, { passive: true });
+    viewport.addEventListener('touchend', e => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX, dy = e.changedTouches[0].clientY - touchY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
+      touchX = touchY = null;
+    }, { passive: true });
+    window.addEventListener('keydown', e => {
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(current + 1); }
+      else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); show(current - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); show(0); }
+      else if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+    });
+    window.addEventListener('hashchange', () => {
+      const m = location.hash.match(/slide-(\d+)/);
+      if (m) show(Number(m[1]) - 1);
+    });
+
+    // guide-label toggle (show/hide image placeholder captions)
+    const gt = document.getElementById('guideToggle');
+    gt.addEventListener('click', () => {
+      const on = getComputedStyle(document.documentElement).getPropertyValue('--guide-display').trim() !== 'none';
+      document.documentElement.style.setProperty('--guide-display', on ? 'none' : 'block');
+      gt.textContent = on ? '가이드 보이기' : '가이드 숨기기';
+    });
+
+    fitStage();
+    const m = location.hash.match(/slide-(\d+)/);
+    show(m ? Number(m[1]) - 1 : 0);
+  </script>
+</body>
+</html>
