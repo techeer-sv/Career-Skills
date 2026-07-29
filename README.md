@@ -30,6 +30,7 @@
 | 스킬 | 명령어 | 설명 |
 |------|--------|------|
 | 이력서 리뷰 | `$hiring-sim-resume-review` | ATS 시뮬레이션 + 리크루터 스크리닝 |
+| 이력서 레드팀 | `$hiring-sim-resume-redteam` | 면접관 관점 감점 적발 — 수치 현실성(규모 추정·리서치) + GitHub 코드·블로그 직접 대조 |
 | 서류 피드백 | `$hiring-prep-doc-feedback` | 이력서 / 자소서 / 포폴 리서치 기반 피드백 |
 | 자기소개서 작성 | `$writing-prep-cover-letter` | 공고 + 이력서 기반 자소서 작성 (전략 진단 · STAR+KKK) |
 | Kevin 피드백 | `$kevin-feedback` | Kevin 페르소나 말투의 이력서 피드백 |

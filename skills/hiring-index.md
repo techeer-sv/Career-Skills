@@ -9,6 +9,7 @@
 | 스킬 | 호출 | 설명 |
 |------|------|------|
 | [이력서 리뷰](hiring-sim-resume-review/SKILL.md) | `$hiring-sim-resume-review` | ATS 시뮬레이션 + 리크루터 스크리닝 |
+| [이력서 레드팀](hiring-sim-resume-redteam/SKILL.md) | `$hiring-sim-resume-redteam` | 면접관 관점 감점 적발 (수치 현실성 규모 추정 + GitHub 코드·블로그 직접 대조, Cartesian doubt) |
 | [포트폴리오 리뷰](hiring-sim-portfolio-review/SKILL.md) | `$hiring-sim-portfolio-review` | 프로젝트 품질과 의사결정 평가 |
 | [포트폴리오 레드팀](hiring-sim-portfolio-redteam/SKILL.md) | `$hiring-sim-portfolio-redteam` | 면접관 관점 비판적 감점 적발 (수치 정합성·모순, Cartesian doubt) |
 | [코딩 테스트](hiring-sim-coding-test/SKILL.md) | `$hiring-sim-coding-test` | 회사 맞춤 문제 출제 + 제출 코드 채점(정확성·복잡도·코드품질·견고성) |
