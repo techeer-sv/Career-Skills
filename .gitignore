@@ -6,6 +6,9 @@
 .codex/
 .claude/
 
+# Agent guidance (local only — must not be published)
+AGENTS.md
+
 # Pipeline runtime data (generated per user session)
 .hiring-pipeline/
 
