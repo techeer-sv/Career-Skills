@@ -138,7 +138,7 @@ install_all_skills() {
 uninstall_all() {
   printf "제거 중...\n"
   local count=0
-  local patterns=("hiring-sim-*" "hiring-prep-*" "hiring-common" "kevin-feedback" "writing-prep-cover-letter")
+  local patterns=("hiring-sim-*" "hiring-prep-*" "hiring-common" "kevin-feedback")
 
   for pattern in "${patterns[@]}"; do
     while IFS= read -r -d '' dir; do
