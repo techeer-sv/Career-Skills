@@ -23,7 +23,6 @@
 | 스킬 | 호출 | 설명 |
 |------|------|------|
 | [서류 피드백](hiring-prep-doc-feedback/SKILL.md) | `$hiring-prep-doc-feedback` | 이력서/자소서/포트폴리오 리서치 기반 피드백 |
-| [자기소개서 작성](writing-prep-cover-letter/SKILL.md) | `$writing-prep-cover-letter` | 공고+이력서 기반 자소서 작성 (전략 진단, 키워드 매칭, STAR+KKK) |
 | [면접 준비 문서](hiring-prep-interview/SKILL.md) | `$hiring-prep-interview` | 공고 분석 + 병렬 리서치 기반 맞춤형 예상 질문 생성 |
 | [포트폴리오 제작](portfolio-build/SKILL.md) | `$portfolio-build` | 디자인 레퍼런스 선택(직접/자동) + 기존 자료 기반 슬라이드 포트폴리오 자동 제작 |
 | [코딩테스트 준비](hiring-prep-coding-test/SKILL.md) | `$hiring-prep-coding-test` | 회사별 코테 리서치(플랫폼·라이브 여부·난이도·빈출 유형) → 유형별 문제 링크·학습 플랜 준비 문서 |
